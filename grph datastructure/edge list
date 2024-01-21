@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+
+#define pii pair<int, int>
+
+using namespace std;
+const int N = 1e5 + 7;
+static void go_on()
+{
+    // pair<int , int>arr[e]; array process
+    vector<pii> v; // vector proccess
+    int n, e;
+    cin >> n >> e;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        v.push_back({a, b});
+    }
+    for (auto u : v)
+    {
+        cout << u.first << " " << u.second;
+        cout << endl;
+    }
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    long long tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
