@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+const int N = 1e5 + 7;
+static void go_on()
+{
+    int n, e;
+    cin >> n >> e;
+    int mat[n][n];
+    memset(mat, 0, sizeof(mat));
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        mat[a][b] = 1;
+        mat[b][a] = 1;
+    }
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            cout << mat[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    long long tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
