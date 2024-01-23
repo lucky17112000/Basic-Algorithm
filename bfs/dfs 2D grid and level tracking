@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+
+#define ll long long int
+
+#define pii pair<int, int>
+
+using namespace std;
+const int N = 1e5 + 7;
+bool visited[20][20];
+int n, m;
+char arr[20][20];
+int dist[20][20];
+vector<pii> d = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+bool is_valid(int i, int j)
+{
+    if (i < 0 or i >= n or j < 0 or j >= m)
+        return false;
+    return true;
+}
+void bfs(int si, int sj)
+{
+    queue<pii> q;
+    q.push({si, sj});
+    visited[si][sj] = true;
+    dist[si][sj] = 0;
+    while (!q.empty())
+    {
+        pii par = q.front();
+        q.pop();
+        // cout << par.first << " " << par.second << endl;
+        for (int i = 0; i < 4; ++i)
+        {
+            int ci = par.first + d[i].first;
+            int cj = par.second + d[i].second;
+            if (is_valid(ci, cj) == true and visited[ci][cj] == false)
+            {
+                q.push({ci, cj});
+                visited[ci][cj] = true;
+                dist[ci][cj] = dist[par.first][par.second] + 1;
+            }
+        }
+    }
+}
+static void go_on()
+{
+    cin >> n >> m;
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < m; ++j)
+        {
+            cin >> arr[i][j];
+        }
+    }
+    memset(visited, false, sizeof(visited));
+    memset(dist, -1, sizeof(dist));
+    int si, sj;
+    cin >> si >> sj;
+    bfs(si, sj);
+    cout << dist[2][3];
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
