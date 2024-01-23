@@ -1,0 +1,71 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+
+#define ll long long int
+
+#define pii pair<int, int>
+
+using namespace std;
+const int N = 1e5 + 7;
+int n, m;
+char arr[20][20];
+bool visited[20][20];
+vector<pii> d = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+bool valid(int i, int j)
+{
+    if (i < 0 or i >= n or j < 0 or j >= m)
+        return false;
+    return true;
+}
+int cnt = 0;
+void dfs(int si, int sj)
+{
+    if (cnt == m)
+    {
+        cout << endl;
+        cnt = 0;
+    }
+    cout << arr[si][sj];
+    ++cnt;
+
+    visited[si][sj] = true;
+    for (int i = 0; i < 4; ++i)
+    {
+        int ci = si + d[i].first;
+        int cj = sj + d[i].second;
+        if (valid(ci, cj) == true and visited[ci][cj] == false)
+        {
+            dfs(ci, cj);
+        }
+    }
+}
+static void go_on()
+{
+    cin >> n >> m;
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < m; ++j)
+        {
+            cin >> arr[i][j];
+        }
+    }
+    int si, sj;
+    cin >> si >> sj;
+    memset(visited, false, sizeof(visited));
+    dfs(si, sj);
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
