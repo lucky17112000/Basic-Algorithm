@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+
+#define ll long long int
+
+using namespace std;
+const int N = 1e5 + 7;
+vector<int> adj[N];
+vector<bool> visited(N, false);
+vector<int> parentArray(N, -1);
+bool flag = false;
+void bfs(int src)
+{
+    queue<int> q;
+    q.push(src);
+    visited[src] = true;
+    while (!q.empty())
+    {
+        int par = q.front();
+        q.pop();
+        for (auto u : adj[par])
+        {
+            if (visited[u] == true and parentArray[par] != u)
+            {
+                flag = true;
+            }
+            if (visited[u] == false)
+            {
+                q.push(u);
+                parentArray[u] = par;
+                visited[u] = true;
+            }
+        }
+    }
+}
+static void go_on()
+{
+    int n, e;
+    cin >> n >> e;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+
+    for (int i = 0; i < n; ++i)
+    {
+        if (!visited[i])
+            bfs(i);
+    }
+    cout << ((flag) ? "Cycle" : "No Cycle") << endl;
+}
+
+int32_t main()
+{
+
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
