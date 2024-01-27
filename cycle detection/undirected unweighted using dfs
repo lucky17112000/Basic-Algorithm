@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+
+#define ll long long int
+
+using namespace std;
+const int N = 1e5 + 7;
+vector<int> adj[N];
+vector<bool> visited(N, false);
+vector<int> parenArray(N, -1);
+bool ans = false;
+void dfs(int src)
+{
+    visited[src] = true;
+    for (auto u : adj[src])
+    {
+        if (visited[u] == true and parenArray[src] != u)
+        {
+            ans = true;
+        }
+
+        if (!visited[u])
+        {
+            parenArray[u] = src;
+            dfs(u);
+        }
+    }
+}
+static void go_on()
+{
+    int n, e;
+    cin >> n >> e;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+    }
+    for (int i = 0; i < n; ++i)
+    {
+        if (!visited[i])
+            dfs(i);
+    }
+    cout << ((ans) ? "Cycle detect" : "Cycle not detect") << endl;
+}
+
+int32_t main()
+{
+
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
