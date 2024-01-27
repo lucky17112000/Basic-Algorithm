@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+#define strim stringstream
+#define ll long long int
+
+using namespace std;
+const int N = 1e5 + 7;
+vector<int> adj[N];
+vector<bool> visited(N, false);
+vector<bool> pathTrack(N, false);
+bool ans = false;
+void dfs(int src)
+{
+    visited[src] = true;
+    pathTrack[src] = true;
+    for (auto u : adj[src])
+    {
+        if (pathTrack[u] == true)
+        {
+            ans = true;
+        }
+        if (!visited[u])
+            dfs(u);
+    }
+    pathTrack[src] = false;
+}
+static void go_on()
+{
+    int n, e;
+    cin >> n >> e;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        // adj[b].push_back(a)
+    }
+    for (int i = 0; i < n; ++i)
+    {
+        if (!visited[i])
+            dfs(i);
+    }
+    cout << ((ans) ? "Cycle" : "Not Cycle") << endl;
+}
+
+int32_t main()
+{
+
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
