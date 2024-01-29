@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+
+#define ll long long int
+#define inf INT_MAX
+
+#define pii pair<int, int>
+
+using namespace std;
+const int N = 1e5 + 7;
+vector<pii> arr[N];
+vector<int> dist(N, inf);
+void dijekstra(int src)
+{
+    queue<pii> q;
+    q.push({src, 0});
+    dist[src] = 0;
+    while (!q.empty())
+    {
+        pii top = q.front();
+        q.pop();
+        int parentNode = top.first;
+        int parentCost = top.second;
+        for (auto u : arr[parentNode])
+        {
+            pii adjTop = u;
+            int childNode = u.first;
+            int childCost = u.second;
+            if (parentCost + childCost < dist[childNode])
+            {
+                dist[childNode] = parentCost + childCost;
+                q.push({childNode, dist[childNode]});
+            }
+        }
+    }
+}
+static void go_on()
+{
+    int n, e;
+    cin >> n >> e;
+    while (e--)
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+        arr[a].push_back({b, c});
+        arr[b].push_back({a, c});
+    }
+    dijekstra(0);
+    for (int i = 0; i < n; ++i)
+    {
+        cout << i << " " << dist[i] << endl;
+    }
+}
+
+int32_t main()
+{
+
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
