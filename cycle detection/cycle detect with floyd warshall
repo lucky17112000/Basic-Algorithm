@@ -1,0 +1,85 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+#define strim stringstream
+#define ll long long int
+#define inf INT_MAX
+#define negInf INT_MIN
+#define mod %
+#define find_array_max *max_element(arr.begin(), arr.end());
+#define find_array_min *min_element(arr.begin(), arr.end());
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define psii pair<string, pair<int, int>>
+#define left_range(i, x, y) for (int i = x; i <= y; i++)
+#define right_range(i, x, y) for (int i = y; i >= x; i--)
+void hey_output()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+}
+using namespace std;
+const int N = 1e5 + 5;
+static void go_on()
+{
+    int n, e;
+    cin >> n >> e;
+    ll dist[n][n];
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            dist[i][j] = inf;
+            if (i == j)
+                dist[i][j] = 0;
+        }
+    }
+    while (e--)
+    {
+        int u, v, w;
+        cin >> u >> v >> w;
+        dist[u][v] = w;
+    }
+
+    for (int k = 0; k < n; ++k)
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < n; ++j)
+            {
+                if (dist[i][k] + dist[k][j] < dist[i][j])
+                    dist[i][j] = dist[i][k] + dist[k][j];
+            }
+        }
+    }
+
+    cout << "after floyd apply" << endl;
+
+    bool isCycle = false;
+    for (int i = 0; i < n; ++i)
+    {
+        if (dist[i][i] < 0)
+        {
+            isCycle = true;
+            break;
+        }
+    }
+    cout << ((isCycle) ? "YES" : "NO") << endl;
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    hey_output();
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
