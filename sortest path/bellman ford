@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+
+#define ll long long int
+#define inf INT_MAX
+
+using namespace std;
+const int N = 1e5 + 5;
+class Edge
+{
+public:
+    int u, v, w;
+    Edge(int u, int v, int w)
+    {
+        this->u = u;
+        this->v = v;
+        this->w = w;
+    }
+};
+vector<int> dist(N, inf);
+static void go_on()
+{
+    int n, e;
+    cin >> n >> e;
+    vector<Edge> edgeList;
+    while (e--)
+    {
+        int u, v, w;
+        cin >> u >> v >> w;
+        edgeList.push_back(Edge(u, v, w));
+    }
+    dist[0] = 0;
+    for (int i = 0; i < n - 1; ++i)
+    {
+        for (Edge ed : edgeList)
+        {
+            int u, v, w;
+            u = ed.u;
+            v = ed.v;
+            w = ed.w;
+            if (dist[u] < inf and dist[u] + w < dist[v])
+            {
+                dist[v] = dist[u] + w;
+            }
+        }
+    }
+
+    for (int i = 0; i < n; ++i)
+    {
+        cout << dist[i] << " ";
+    }
+}
+
+int32_t main()
+{
+
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
