@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+#define endl '\n'
+
+#define ll long long int
+
+using namespace std;
+const int N = 1e5 + 5;
+int par[N];
+int g_size[N];
+void dsu_init(int n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        par[i] = -1;
+        g_size[i] = 1;
+    }
+}
+int dsu_find(int node)
+{
+    if (par[node] == -1)
+        return node;
+    int leader = dsu_find(par[node]);
+    par[node] = leader;
+    return leader;
+}
+void dsu_union(int node1, int node2)
+{
+    int leaderA = dsu_find(node1);
+    int leaderB = dsu_find(node2);
+    if (g_size[leaderA] > g_size[leaderB])
+    {
+        par[leaderB] = leaderA;
+        g_size[leaderA] += g_size[leaderB];
+    }
+    else
+    {
+        par[leaderA] = leaderB;
+        g_size[leaderB] += g_size[leaderA];
+    }
+}
+static void go_on()
+{
+    int n, e;
+    cin >> n >> e;
+    dsu_init(n);
+    bool isCycle = false;
+    while (e--)
+    {
+        int a, b;
+        cin >> a >> b;
+        int leaderA = dsu_find(a);
+        int leaderB = dsu_find(b);
+        if (leaderA == leaderB)
+        {
+            isCycle = true;
+        }
+        else
+        {
+            dsu_union(a, b);
+        }
+    }
+    if (isCycle)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    // hey_output();
+    ll tt = 1;
+    // cin >> tt;
+    while (tt--)
+    {
+        go_on();
+    }
+
+    return 0;
+}
