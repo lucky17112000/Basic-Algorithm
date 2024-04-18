@@ -1,0 +1,85 @@
+// Bismillah
+
+/*When I wrote this code,
+only Allah and I knew what I did.Now... only Allah knows*/
+
+#include <bits/stdc++.h>
+#define endl '\n'
+#define ll long long int
+#define inf INT_MAX
+#define pii pair<int, int>
+#define negInf INT_MIN
+void hey_output()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+}
+using namespace std;
+const int N = 1e5 + 7;
+void solve()
+{
+    // vector lower and upper
+    // 1.lower bound
+    // actually  first occ ==  lower bound
+    // less then array minimum value lowe bound is minimum value
+    /*
+    je value arry te nai and amra jodi array er higest value er
+    cheyo boro value kuji tahole last hypothitical index retunr korbe*/
+    int n, k;
+    cin >> n >> k;
+    vector<int> arr(n);
+
+    for (int i = 0; i < n; ++i)
+        cin >> arr[i];
+    auto it1 = lower_bound(arr.begin(), arr.end(), k);
+    // cout << it - arr.begin();
+
+    // upper bound
+    // key er immidiate boro value retun korbe upper bound
+    /*
+    minumum value er cheyo chuto value er upper bound kujle
+    sob theke chuto value upper bound return korbe
+    */
+    /*
+    maximum value er cheyo boro
+    value er upper bound kujle last hypothitical index return korbe
+    */
+    auto it2 = upper_bound(arr.begin(), arr.end(), k);
+    // cout << it2 - arr.begin();
+    //  vector lower and upper
+
+
+
+    /*----------------------------------------------------------*/
+
+    // set upper and lower
+    // set lower bound
+    set<int> mySet = {10, 20, 30, 30, 40, 50};
+    auto it3 = mySet.lower_bound(100);
+    cout << *it3 << endl;
+    auto it4 = mySet.upper_bound(100);
+    // cout << *it4 << endl;
+    //  set upper and lower
+
+    // multi set as usual same
+    //map , multimap , upperbound lowe bound possible
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    hey_output();
+
+    int t = 1;
+    // cin >> t;
+    while (t--)
+    {
+        solve();
+    }
+
+    return 0;
+}
+// Alhamdulillah
