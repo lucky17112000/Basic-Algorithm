@@ -1,0 +1,42 @@
+// Bismillah
+
+/*When I write code, my only request to Creator(Allah) is that he opens
+my eyes of knowledge. And may he be with me... And make everything
+easy for me..Amin...............*/
+
+#include <bits/stdc++.h>
+#define endl '\n'
+#define ll long long int
+
+using namespace std;
+const int N = 1e5 + 7;
+ll kadanesAlgorithm(vector<ll> &arr, int n)
+{
+    ll sum = 0;
+    ll ans = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        sum += arr[i];
+        ans = max(ans, sum);
+        if (sum < 0)
+            sum = 0;
+    }
+    return ans;
+}
+
+int32_t main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    // hey_output();
+
+    int n;
+    cin >> n;
+    vector<ll> arr(n);
+    for (int i = 0; i < n; ++i)
+        cin >> arr[i];
+    cout << kadanesAlgorithm(arr, n) << endl;
+
+    return 0;
+}
+// Alhamdulillah
