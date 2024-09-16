@@ -1,0 +1,36 @@
+lower bound:smallest index such that greater than or equal to given value : arr[mid]>=x
+upper bound:smallest index such that greater than to given value : arr[mid]>x
+auto Lower_Bound = [](vector<ll> &x, ll target)
+{
+    ll low = 0, high = x.size() - 1;
+    ll ANS = x.size();
+    while (low <= high)
+    {
+        ll mid = (low + high) / 2;
+        if (x[mid] >= target)
+        {
+            ANS = mid;
+            high = mid - 1;
+        }
+        else
+            low = mid + 1;
+    }
+    return ANS;
+};
+auto UpPer_Bound = [](vector<ll> &x, ll target)
+{
+    ll low = 0, high = x.size() - 1;
+    ll ANS = x.size();
+    while (low <= high)
+    {
+        ll mid = (low + high) / 2;
+        if (x[mid] > target)
+        {
+            ANS = mid;
+            high = mid - 1;
+        }
+        else
+            low = mid + 1;
+    }
+    return ANS;
+};
