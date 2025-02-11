@@ -1,65 +1,72 @@
+// Bismillah
+//  Problem is -> bfs.cpp
 #include <bits/stdc++.h>
-#define endl '\n'
-
+#define ll long long int
 using namespace std;
-const int N = 1e5 + 7;
-vector<int> arr[N];
-vector<bool> visited(N, false);
-vector<int> level(N, -1); // level tracker
-void bfs(int src)
+const ll N = 1e5 + 7;
+vector<ll> adj[N];
+bool visited[N];
+ll level[N];
+ll path[N];
+void bfs(ll src)
 {
-    queue<int> q;
+    queue<ll> q;
     q.push(src);
     visited[src] = true;
     level[src] = 0;
-
     while (!q.empty())
     {
-        int parent = q.front();
+        ll parent = q.front();
         q.pop();
-        cout << parent << " "; // bfs travarsal value
-        for (auto u : arr[parent])
+        cout << parent << " ";
+        for (auto child : adj[parent])
         {
-            if (visited[u] == false)
+            if (!visited[child])
             {
-                q.push(u);
-                visited[u] = true;
-                level[u] = level[parent] + 1;
+                q.push(child);
+                visited[child] = true;
+                level[child] = level[parent] + 1;
+                path[child] = parent;
             }
         }
     }
 }
-static void go_on()
-{
-    int n, e;
-    cin >> n >> e;
-    while (e--)
-    {
-        int a, b;
-        cin >> a >> b;
-        arr[a].push_back(b);
-        arr[b].push_back(a);
-    }
-    bfs(0);
-    cout << endl;
-    // level print
-    for (int i = 0; i < n; ++i)
-    {
-        cout << i << " " << level[i] << endl;
-    }
-}
-
 int32_t main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-
-    long long tt = 1;
-    // cin >> tt;
-    while (tt--)
+    ll n, e;
+    cin >> n >> e;
+    while (e--)
     {
-        go_on();
+        ll a, b;
+        cin >> a >> b;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
     }
-
+    memset(visited, false, sizeof(visited));
+    memset(level, -1, sizeof(level));
+    memset(path, -1, sizeof(path));
+    bfs(0);
+    cout << endl;
+    // for (int i = 0; i < n; ++i)
+    // {
+    //     cout << i << " : " << level[i] << endl;
+    // }
+    ll des;
+    cin >> des;
+    ll x = des;
+    stack<ll> st;
+    while (x != -1)
+    {
+        st.push(x);
+        x = path[x];
+    }
+    while (!st.empty())
+    {
+        cout << st.top() << " ";
+        st.pop();
+    }
     return 0;
 }
+// Alhamdulillah
